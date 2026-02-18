@@ -53,7 +53,7 @@ Organizza i siti web realizzati e tieni traccia dei plugin.
 Clona il repository nella cartella dei plugin di WordPress:
 
 Bash
-git clone https://github.com/tuo-username/mio-web-agency.git
+git clone https://github.com/Seconet/MioWeb-Agency.git
 Attiva il plugin dalla dashboard di WordPress.
 
 Troverai il nuovo menu "MioWeb" nella barra laterale sinistra.
@@ -87,4 +87,5 @@ Questo progetto è distribuito sotto licenza GPLv2 o successiva. Consulta il fil
 
 📧 ## Supporto
 Sviluppato con ❤️ da Seconet.it Per domande o supporto commerciale, contattaci tramite il nostro sito web.
+
 
