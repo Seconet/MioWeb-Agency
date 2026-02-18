@@ -29,18 +29,22 @@ Gestire un'agenzia web significa destreggiarsi tra decine di scadenze, credenzia
 📸 ## Screenshot
 1. Dashboard Panoramica
 Visualizza immediatamente lo stato della tua agenzia e le scadenze dei prossimi 30 giorni.
+
 ![Dashboard](assets/screenshot-1.png)
 
 2. Gestione Clienti e CRM
 L'elenco completo dei tuoi contatti business con filtri avanzati.
+
 ![Clienti](assets/screenshot-2.png)
 
 3. Dettaglio Hosting e Scadenze
 Non perdere mai più un rinnovo grazie al tracking visivo dei piani hosting.custom sviluppati.
+
 ![Hosting](assets/screenshot-3.png)
 
 4. Repository Progetti e Plugin
 Organizza i siti web realizzati e tieni traccia dei plugin.
+
 ![Maintenance](assets/screenshot-4.png)
 
 
