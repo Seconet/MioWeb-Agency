@@ -41,3 +41,6 @@ foreach ( $mioweb_post_types as $type ) {
 // 5. Pulizia finale Opzioni (se presenti)
 delete_option( 'mioweb_agency_version' );
 delete_option( 'mioweb_db_version' );
+
+delete_option( 'rewrite_rules' ); // Forza ricreazione rewrite rules
+flush_rewrite_rules(); // Pulisce le regole
