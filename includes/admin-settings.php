@@ -66,8 +66,8 @@ function mioweb_add_admin_menu()
 
     add_submenu_page(
         'mioweb',
-        __('Plugin WP', 'mioweb-agency'),
-        __('Plugin WP', 'mioweb-agency'),
+        __('Plugin', 'mioweb-agency'),
+        __('Plugin', 'mioweb-agency'),
         'manage_options',
         'edit.php?post_type=mioweb_plugin'
     );
@@ -528,4 +528,5 @@ if ( ! function_exists( 'mioweb_clean_sql_for_check' ) ) {
         return (string) $sql;
     }
 }
+
 
