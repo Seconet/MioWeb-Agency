@@ -1,23 +1,32 @@
-🚀 MioWeb Agency Management CRM
+🚀 # MioWeb Agency Management CRM
+
+**Contributors:** Sergio Cornacchione  
+**Tags:** agency crm, client management, hosting tracking, maintenance contracts, theme maintenance  
+**Requires at least:** 6.0 
+**Tested up to:** 6.9  
+**Stable tag:** 1.0.0  
+**License:** GPL v2 or later  
+**License URI:** https://www.gnu.org/licenses/gpl-2.0.html 
+
 MioWeb Agency Management è il CRM definitivo progettato specificamente per web agency e freelance che lavorano con WordPress. Gestisci clienti, piani hosting, contratti di manutenzione e il tuo portfolio progetti in un unico hub centralizzato.
 
-🔥 Perché MioWeb?
+🔥 ## Perché MioWeb?
 Gestire un'agenzia web significa destreggiarsi tra decine di scadenze, credenziali smarrite e contratti ricorrenti. Questo plugin elimina il caos dei fogli Excel, portando tutta la gestione operativa direttamente dentro la tua bacheca WordPress.
 
-🌟 Funzionalità principali
-Gestione Clienti (CRM): Database completo con dati fiscali, contatti e note.
+🌟 ## Funzionalità principali
+- ✅ Gestione Clienti (CRM): Database completo con dati fiscali, contatti e note.
 
-Tracking Hosting: Monitora provider, costi, scadenze e credenziali di accesso.
+- ✅ Tracking Hosting: Monitora provider, costi, scadenze e credenziali di accesso.
 
-Contratti di Manutenzione: Gestisci i canoni ricorrenti e ricevi avvisi sulle scadenze.
+- ✅ Contratti di Manutenzione: Gestisci i canoni ricorrenti e ricevi avvisi sulle scadenze.
 
-Portfolio Tecnico: Catalogo di Siti Web, Plugin e Temi sviluppati (Custom Post Types).
+- ✅ Portfolio Tecnico: Catalogo di Siti Web, Plugin e Temi sviluppati (Custom Post Types).
 
-Dashboard Intelligente: Statistiche in tempo reale e alert per i rinnovi imminenti.
+- ✅ Dashboard Intelligente: Statistiche in tempo reale e alert per i rinnovi imminenti.
 
-Export CSV: Esporta i tuoi dati per reportistica o fatturazione esterna.
+- ✅ Export CSV: Esporta i tuoi dati per reportistica o fatturazione esterna.
 
-📸 Screenshot
+📸 ## Screenshot
 1. Dashboard Panoramica
 Visualizza immediatamente lo stato della tua agenzia e le scadenze dei prossimi 30 giorni.
 
@@ -30,7 +39,7 @@ Non perdere mai più un rinnovo grazie al tracking visivo dei piani hosting.
 4. Repository Progetti e Plugin
 Organizza i siti web realizzati e tieni traccia dei plugin custom sviluppati.
 
-🛠 Installazione
+🛠 ## Installazione
 Clona il repository nella cartella dei plugin di WordPress:
 
 Bash
@@ -39,7 +48,7 @@ Attiva il plugin dalla dashboard di WordPress.
 
 Troverai il nuovo menu "MioWeb" nella barra laterale sinistra.
 
-💻 Sviluppo e Standard
+💻 ## Sviluppo e Standard
 Il plugin è stato sviluppato seguendo i WordPress Coding Standards per garantire sicurezza e performance:
 
 Utilizzo di wpdb::prepare per ogni query SQL.
@@ -48,7 +57,7 @@ Sanitizzazione e validazione di tutti gli input (zero warning nel Plugin Check).
 
 Supporto completo per le traduzioni.
 
-🤝 Contribuire
+🤝 ## Contribuire
 Le pull request sono benvenute! Se vuoi proporre modifiche o nuove funzionalità:
 
 Apri una Issue per discutere il cambiamento che vorresti apportare.
@@ -63,8 +72,8 @@ Fai il Push sul branch (git push origin feature/AmazingFeature).
 
 Apri una Pull Request.
 
-📄 Licenza
+📄 ## Licenza
 Questo progetto è distribuito sotto licenza GPLv2 o successiva. Consulta il file LICENSE per ulteriori dettagli.
 
-📧 Supporto
-Sviluppato con ❤️ da Seconet. Per domande o supporto commerciale, contattaci tramite il nostro sito web.
+📧 ## Supporto
+Sviluppato con ❤️ da Seconet.it Per domande o supporto commerciale, contattaci tramite il nostro sito web.
