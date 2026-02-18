@@ -1,0 +1,101 @@
+  .mioweb-form-layout {
+            display: flex;
+            gap: 30px;
+            margin-top: 20px;
+        }
+
+        .mioweb-form-main {
+            flex: 2;
+            min-width: 0;
+        }
+
+        .mioweb-form-sidebar {
+            flex: 1;
+            min-width: 250px;
+        }
+
+        .mioweb-form-section {
+            background: #fff;
+            border: 1px solid #ccd0d4;
+            box-shadow: 0 1px 1px rgba(0, 0, 0, .04);
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .mioweb-form-section h2 {
+            margin-top: 0;
+            font-size: 1.3em;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .mioweb-form-row {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 15px;
+        }
+
+        .mioweb-form-field {
+            flex: 1;
+        }
+
+        .mioweb-form-field.full-width {
+            flex: 0 0 100%;
+        }
+
+        .mioweb-form-field label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .mioweb-form-field input[type="text"],
+        .mioweb-form-field input[type="email"],
+        .mioweb-form-field select {
+            width: 100%;
+            max-width: 100%;
+        }
+
+        .mioweb-form-actions {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .mioweb-form-actions .button {
+            text-align: center;
+            justify-content: center;
+        }
+
+        .mioweb-stats-list {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        .mioweb-stats-list li {
+            padding: 8px 0;
+            border-bottom: 1px solid #f0f0f1;
+        }
+
+        .mioweb-stats-list li:last-child {
+            border-bottom: none;
+        }
+
+        .mioweb-quick-actions {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        @media screen and (max-width: 1200px) {
+            .mioweb-form-layout {
+                flex-direction: column;
+            }
+
+            .mioweb-form-row {
+                flex-direction: column;
+                gap: 10px;
+            }
+        }

@@ -1,0 +1,86 @@
+  .mioweb-form-layout {
+            display: flex;
+            gap: 30px;
+            margin-top: 20px;
+        }
+        
+        .mioweb-form-main {
+            flex: 2;
+            min-width: 0;
+        }
+        
+        .mioweb-form-sidebar {
+            flex: 1;
+            min-width: 250px;
+        }
+        
+        .mioweb-form-section {
+            background: #fff;
+            border: 1px solid #ccd0d4;
+            box-shadow: 0 1px 1px rgba(0,0,0,.04);
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .mioweb-form-section h2 {
+            margin-top: 0;
+            font-size: 1.3em;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .mioweb-form-row {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+        }
+        
+        .mioweb-form-field {
+            flex: 1 1 200px;
+        }
+        
+        .mioweb-form-field.full-width {
+            flex: 0 0 100%;
+        }
+        
+        .mioweb-form-field label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+        
+        .mioweb-form-field input[type="text"],
+        .mioweb-form-field input[type="number"],
+        .mioweb-form-field input[type="date"],
+        .mioweb-form-field select,
+        .mioweb-form-field textarea {
+            width: 100%;
+            max-width: 100%;
+        }
+        
+        .mioweb-form-actions {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        
+        .mioweb-form-actions .button {
+            text-align: center;
+            justify-content: center;
+        }
+        
+        @media screen and (max-width: 1200px) {
+            .mioweb-form-layout {
+                flex-direction: column;
+            }
+            
+            .mioweb-form-row {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .mioweb-form-field {
+                flex: 1 1 auto;
+            }
+        }

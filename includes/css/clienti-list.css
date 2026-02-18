@@ -1,0 +1,50 @@
+ .mioweb-filters {
+            margin: 20px 0;
+            padding: 15px;
+            background: #fff;
+            border: 1px solid #ccd0d4;
+            box-shadow: 0 1px 1px rgba(0, 0, 0, .04);
+        }
+
+        .mioweb-filter-row {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .mioweb-badge {
+            display: inline-block;
+            padding: 3px 10px;
+            background: #0073aa;
+            color: white;
+            border-radius: 50px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .mioweb-actions {
+            display: flex;
+            gap: 5px;
+        }
+
+        .mioweb-delete {
+            color: #dc3232 !important;
+            border-color: #dc3232 !important;
+        }
+
+        .mioweb-delete:hover {
+            background: #dc3232 !important;
+            color: white !important;
+        }
+
+        @media screen and (max-width: 782px) {
+            .mioweb-filter-row {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .mioweb-actions {
+                flex-direction: column;
+            }
+        }

@@ -1,0 +1,123 @@
+   .mioweb-stats-cards {
+            display: flex;
+            gap: 15px;
+            margin: 20px 0;
+            flex-wrap: wrap;
+        }
+        
+        .mioweb-stat-card {
+            background: #fff;
+            border: 1px solid #ccd0d4;
+            border-radius: 4px;
+            padding: 15px 20px;
+            min-width: 150px;
+            flex: 1;
+            box-shadow: 0 1px 1px rgba(0,0,0,.04);
+        }
+        
+        .mioweb-stat-card.warning {
+            border-left: 4px solid #ffb900;
+        }
+        
+        .mioweb-stat-card.expired {
+            border-left: 4px solid #dc3232;
+        }
+        
+        .mioweb-stat-label {
+            display: block;
+            color: #666;
+            font-size: 13px;
+            margin-bottom: 5px;
+        }
+        
+        .mioweb-stat-value {
+            display: block;
+            font-size: 24px;
+            font-weight: 600;
+            color: #23282d;
+        }
+        
+        .mioweb-status {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 50px;
+            font-size: 12px;
+            font-weight: 600;
+            background: #f0f0f1;
+            color: #50575e;
+        }
+        
+        .mioweb-status.status-active {
+            background: #00a32a;
+            color: white;
+        }
+        
+        .mioweb-status.status-suspended {
+            background: #ffb900;
+            color: #000;
+        }
+        
+        .mioweb-status.status-expired {
+            background: #999;
+            color: white;
+        }
+        
+        .mioweb-filters {
+            margin: 20px 0;
+            padding: 15px;
+            background: #fff;
+            border: 1px solid #ccd0d4;
+            box-shadow: 0 1px 1px rgba(0,0,0,.04);
+        }
+        
+        .mioweb-filter-row {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
+        .mioweb-actions {
+            display: flex;
+            gap: 5px;
+            flex-wrap: wrap;
+        }
+        
+        .mioweb-delete {
+            color: #dc3232 !important;
+            border-color: #dc3232 !important;
+        }
+        
+        .mioweb-delete:hover {
+            background: #dc3232 !important;
+            color: white !important;
+        }
+        
+        td.expired {
+            color: #dc3232;
+            font-weight: 600;
+        }
+        
+        td.warning {
+            color: #ffb900;
+            font-weight: 600;
+        }
+        
+        @media screen and (max-width: 782px) {
+            .mioweb-filter-row {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .mioweb-actions {
+                flex-direction: column;
+            }
+            
+            .mioweb-stats-cards {
+                flex-direction: column;
+            }
+            
+            .mioweb-stat-card {
+                width: 100%;
+            }
+        }
