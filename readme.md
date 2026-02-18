@@ -28,20 +28,21 @@ Gestire un'agenzia web significa destreggiarsi tra decine di scadenze, credenzia
 
 📸 ## Screenshot
 1. Dashboard Panoramica
-![Dashboard] (https://github.com/Seconet/MioWeb-Agency/blob/main/assets/screenshot-1.png)
 Visualizza immediatamente lo stato della tua agenzia e le scadenze dei prossimi 30 giorni.
+![Dashboard](assets/screenshot-1.png)
 
 2. Gestione Clienti e CRM
-![Clienti](assets/screenshot-2.png)
 L'elenco completo dei tuoi contatti business con filtri avanzati.
+![Clienti](assets/screenshot-2.png)
 
 3. Dettaglio Hosting e Scadenze
-![Hosting](https://github.com/Seconet/MioWeb-Agency/blob/main/assets/screenshot-3.png)
 Non perdere mai più un rinnovo grazie al tracking visivo dei piani hosting.custom sviluppati.
+![Hosting](assets/screenshot-3.png)
 
 4. Repository Progetti e Plugin
-![Maintenance] (https://github.com/Seconet/MioWeb-Agency/blob/main/assets/screenshot-4.png)
 Organizza i siti web realizzati e tieni traccia dei plugin.
+![Maintenance](assets/screenshot-4.png)
+
 
 
 🛠 ## Installazione
