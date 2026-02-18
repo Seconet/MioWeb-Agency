@@ -28,7 +28,7 @@ Gestire un'agenzia web significa destreggiarsi tra decine di scadenze, credenzia
 
 📸 ## Screenshot
 1. Dashboard Panoramica
-![Dashboard] (https://github.com/Seconet/MioWeb-Agency/blob/main/assets/screenshot-1.png)
+![Dashboard] (https://github.com/Seconet/MioWeb-Agency/blob/main/assets/screenshot-1.png?raw=true)
 Visualizza immediatamente lo stato della tua agenzia e le scadenze dei prossimi 30 giorni.
 
 2. Gestione Clienti e CRM
@@ -81,6 +81,7 @@ Questo progetto è distribuito sotto licenza GPLv2 o successiva. Consulta il fil
 
 📧 ## Supporto
 Sviluppato con ❤️ da Seconet.it Per domande o supporto commerciale, contattaci tramite il nostro sito web.
+
 
 
 
