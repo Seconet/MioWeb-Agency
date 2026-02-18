@@ -1,4 +1,4 @@
-🚀 # MioWeb Agency Management CRM
+# MioWeb Agency Management CRM
 
 **Contributors:** Sergio Cornacchione  
 **Tags:** agency crm, client management, hosting tracking, maintenance contracts, theme maintenance  
@@ -77,3 +77,4 @@ Questo progetto è distribuito sotto licenza GPLv2 o successiva. Consulta il fil
 
 📧 ## Supporto
 Sviluppato con ❤️ da Seconet.it Per domande o supporto commerciale, contattaci tramite il nostro sito web.
+
