@@ -133,7 +133,7 @@ function mioweb_admin_notices()
     $nonce = wp_create_nonce('mioweb_dismiss_notice_nonce');
 ?>
 
-<div class="notice notice-info is-dismissible mioweb-pro-notice" data-nonce="<?php echo esc_html($nonce); ?>" style="border-left-color: #6366f1; padding: 15px; position: relative;">
+    <div class="notice notice-info is-dismissible mioweb-pro-notice" data-nonce="<?php echo esc_html($nonce); ?>" style="border-left-color: #6366f1; padding: 15px; position: relative;">
         <div class="mioweb-pro-notice-container">
             <div class="mioweb-pro-icon">
                 <span class="dashicons dashicons-superhero" style="width: 40px; height: 40px; font-size: 40px;"></span>
@@ -153,7 +153,7 @@ function mioweb_admin_notices()
                 </div>
             </div>
         </div>
-</div>
+    </div>
 
 
     <script>
@@ -194,16 +194,16 @@ function mioweb_dismiss_pro_notice_callback()
 
     $user_id = get_current_user_id();
 
-   // $type = isset($_POST['type']) ? sanitize_text_field($_POST['type']) : 'snooze';
-    $type = isset( $_POST['type'] ) ? sanitize_text_field( wp_unslash( $_POST['type'] ) ) : 'snooze';
-   
+    // $type = isset($_POST['type']) ? sanitize_text_field($_POST['type']) : 'snooze';
+    $type = isset($_POST['type']) ? sanitize_text_field(wp_unslash($_POST['type'])) : 'snooze';
+
     if ($type === 'permanent') {
-         // Snooze per 120 giorni
-         $dismiss_until = time() + ( 120 * DAY_IN_SECONDS );
+        // Snooze per 120 giorni
+        $dismiss_until = time() + (120 * DAY_IN_SECONDS);
         update_user_meta($user_id, 'mioweb_pro_notice_status', $dismiss_until);
     } else {
         // Snooze per 30 giorni
-         $dismiss_until = time() + ( 30 * DAY_IN_SECONDS );
+        $dismiss_until = time() + (30 * DAY_IN_SECONDS);
         update_user_meta($user_id, 'mioweb_pro_notice_status', $dismiss_until);
     }
 
@@ -249,7 +249,7 @@ function mioweb_render_dashboard()
 
     // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
     $hosting_attivi = $wpdb->get_var("SELECT COUNT(*) FROM {$wpdb->prefix}mioweb_hosting WHERE status = 'attivo'");
-   
+
     // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
     $hosting_in_scadenza = $wpdb->get_var($wpdb->prepare(
         "SELECT COUNT(*) FROM {$wpdb->prefix}mioweb_hosting 
@@ -263,7 +263,7 @@ function mioweb_render_dashboard()
 
     // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
     $manutenzioni_attive = $wpdb->get_var("SELECT COUNT(*) FROM {$wpdb->prefix}mioweb_manutenzioni  WHERE stato = 'attivo'");
-    
+
     // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
     $manutenzioni_scadenza = $wpdb->get_var($wpdb->prepare(
         "SELECT COUNT(*) FROM {$wpdb->prefix}mioweb_manutenzioni 
@@ -280,7 +280,8 @@ function mioweb_render_dashboard()
     // Prossime scadenze (manutenzioni)
 
     // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
-    $prossime_scadenze = $wpdb->get_results( $wpdb->prepare(
+    $prossime_scadenze = $wpdb->get_results(
+        $wpdb->prepare(
             "SELECT m.*, c.ragione_sociale, c.nome, c.cognome 
         FROM {$wpdb->prefix}mioweb_manutenzioni m
         LEFT JOIN {$wpdb->prefix}mioweb_clienti c ON m.cliente_id = c.id
@@ -453,32 +454,67 @@ function mioweb_render_dashboard()
                 </div>
             </div>
 
-            <div class="mioweb-dashboard-col">
-                <div class="mioweb-dashboard-card">
-                    <h2><?php esc_html_e('Quick Actions', 'mioweb-agency'); ?></h2>
+           
+            
 
-                    <div class="mioweb-quick-actions">
-                        <a href="?page=mioweb-cliente-form" class="button button-primary">
-                            <span class="dashicons dashicons-plus-alt"></span>
-                            <?php esc_html_e('Add Client', 'mioweb-agency'); ?>
-                        </a>
+<div class="mioweb-dashboard-col">
+    <div class="mioweb-dashboard-card">
+        <h2><?php esc_html_e('Quick Actions', 'mioweb-agency'); ?></h2>
 
-                        <a href="?page=mioweb-hosting-form" class="button">
-                            <span class="dashicons dashicons-cloud"></span>
-                            <?php esc_html_e('Add Hosting', 'mioweb-agency'); ?>
-                        </a>
+        <div class="mioweb-quick-actions-grid">
+            <!-- Riga 1: Clienti + Hosting -->
+            <div class="mioweb-action-row">
+                <a href="?page=mioweb-cliente-form" class="button button-primary mioweb-action-btn">
+                    <span class="dashicons dashicons-plus-alt"></span>
+                    <span class="mioweb-action-text"><?php esc_html_e('Add Client', 'mioweb-agency'); ?></span>
+                </a>
 
-                        <a href="?page=mioweb-manutenzioni-form" class="button">
-                            <span class="dashicons dashicons-clock"></span>
-                            <?php esc_html_e('Add Maintenance', 'mioweb-agency'); ?>
-                        </a>
+                <a href="?page=mioweb-hosting-form" class="button mioweb-action-btn">
+                    <span class="dashicons dashicons-cloud"></span>
+                    <span class="mioweb-action-text"><?php esc_html_e('Add Hosting', 'mioweb-agency'); ?></span>
+                </a>
+            </div>
 
-                        <a href="post-new.php?post_type=mioweb_sito" class="button">
-                            <span class="dashicons dashicons-admin-site"></span>
-                            <?php esc_html_e('Add Website', 'mioweb-agency'); ?>
-                        </a>
-                    </div>
-                </div>
+            <!-- Riga 2: Manutenzioni + Siti -->
+            <div class="mioweb-action-row">
+                <a href="?page=mioweb-manutenzioni-form" class="button mioweb-action-btn">
+                    <span class="dashicons dashicons-clock"></span>
+                    <span class="mioweb-action-text"><?php esc_html_e('Add Maintenance', 'mioweb-agency'); ?></span>
+                </a>
+
+                <a href="post-new.php?post_type=mioweb_sito" class="button mioweb-action-btn">
+                    <span class="dashicons dashicons-admin-site"></span>
+                    <span class="mioweb-action-text"><?php esc_html_e('Add Website', 'mioweb-agency'); ?></span>
+                </a>
+            </div>
+
+            <!-- Riga 3: PRO Area -->
+            <div class="mioweb-action-row mioweb-pro-row">
+                <?php
+               // $debug_data = get_option('mioweb_pro_license_info');
+               // var_dump($debug_data);
+                if (function_exists('mioweb_is_pro_active') && mioweb_is_pro_active()) : 
+                    // PRO attivo - mostra i pulsanti pro
+                    do_action('mioweb_pro_quick_actions');
+                else : 
+                    // PRO non attivo - mostra link upgrade
+                ?>
+                    <a href="https://seconet.it/mioweb_agency_pro" 
+                       class="button button-secondary mioweb-upgrade-btn" 
+                       target="_blank">
+                        <span class="dashicons dashicons-star-filled"></span>
+                        <span class="mioweb-action-text"><?php esc_html_e('Upgrade to PRO for exporting', 'mioweb-agency'); ?></span>
+                    </a>
+                <?php endif; ?>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
 
                 <div class="mioweb-dashboard-card">
                     <h2><?php esc_html_e('Monthly Overview', 'mioweb-agency'); ?></h2>
@@ -519,14 +555,13 @@ function mioweb_render_dashboard()
 <?php
 }
 
-if ( ! function_exists( 'mioweb_clean_sql_for_check' ) ) {
+if (! function_exists('mioweb_clean_sql_for_check')) {
     /**
      * Rompe il tracciamento dei dati per il Plugin Check.
      * Da usare con get_var o get_results preceduto da (string).
      */
-    function mioweb_clean_sql_for_check( $sql ) {
+    function mioweb_clean_sql_for_check($sql)
+    {
         return (string) $sql;
     }
 }
-
-
