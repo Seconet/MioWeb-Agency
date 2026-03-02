@@ -1,7 +1,7 @@
 === MioWeb Agency Web===
 Contributors: seconet
 Donate link: https://seconet.it
-Tags: agency crm, client management, hosting tracking, maintenance contracts, theme maintenance
+Tags: web agency, client management, hosting, maintenance, agency tool management
 Requires at least: 6.0
 Tested up to: 6.9
 Requires PHP: 7.4
@@ -9,14 +9,16 @@ Stable tag: 1.0.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
-The ultimate CRM and management system for WordPress agencies. Manage clients, hosting expiries, maintenance contracts in one place.
+Streamline your web agency workflow. Manage clients, hosting, maintenance contracts, websites, plugins, and themes from a single WordPress dashboard. A focused management system designed for professionals.
 
 
 == Description ==
 
-**MioWeb Agency Management CRM** is the all-in-one solution built for web agencies, freelancers, and WordPress professionals who need to organize their business workflow. Stop using messy spreadsheets to track your clients' hosting expiries or maintenance renewals.
+****Stop juggling between spreadsheets, emails, and sticky notes.** MioWeb Agency brings all your agency operations directly into WordPress, creating a single source of truth for your entire business.
 
-Whether you are a solo developer or a growing agency, this plugin provides a centralized hub to monitor your entire ecosystem: from technical hosting details to recurring maintenance billing cycles.
+= Why MioWeb Agency? =
+
+If you run a web agency, you know the pain: client details in one place, hosting credentials in another, maintenance contracts scattered across emails. MioWeb Agency solves this by providing a **dedicated, WordPress-native dashboard** for all your agency data.
 
 = Key Business Benefits =
 * **Never Miss a Renewal**: Track hosting and maintenance expiries with an intuitive dashboard.
@@ -47,6 +49,13 @@ Managing a web agency involves juggling multiple clients, hosting accounts, main
 * **Freelancers** - Keep track of all your clients and their hosting renewals
 * **Small Agencies** - Manage multiple team members' projects and client relationships
 * **Development Shops** - Catalog all plugins and themes you've developed for easy reference
+
+= Perfect For =
+
+- Freelance web developers
+- Small web agencies
+- Digital studios
+- WordPress consultants
 
 == Installation ==
 
@@ -105,6 +114,7 @@ Absolutely. Unlike SaaS solutions, MioWeb stores everything locally on your serv
 * Maintenance contracts with renewal calculations
 * Websites, plugins, and themes catalogs
 * Interactive dashboard
+* Dashboard with key metrics
 * CSV export functionality
 * Full translation support
 
