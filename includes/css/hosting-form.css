@@ -84,3 +84,41 @@
                 flex: 1 1 auto;
             }
         }
+        .mioweb-status-badge {
+    display: inline-block;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.mioweb-status-badge.status-attivo {
+    background: #00a32a;
+    color: white;
+}
+
+.mioweb-status-badge.status-in_scadenza {
+    background: #ffb900;
+    color: #000;
+}
+
+.mioweb-status-badge.status-scaduto {
+    background: #dc3232;
+    color: white;
+}
+
+.mioweb-status-badge.status-sospeso {
+    background: #999;
+    color: white;
+}
+
+.mioweb-status-badge.status-cancellato {
+    background: #666;
+    color: white;
+}
+
+.mioweb-status-badge.status-in_attivazione {
+    background: #2271b1;
+    color: white;
+}
