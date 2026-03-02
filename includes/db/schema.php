@@ -66,7 +66,7 @@ function mioweb_create_tables() {
         nameserver1 varchar(255),
         nameserver2 varchar(255),
         note_tecniche text,
-        status enum('attivo','sospeso','cancellato','in_attivazione') DEFAULT 'attivo',
+        status enum('attivo','sospeso','cancellato','in_attivazione','scaduto','in_scadenza') DEFAULT 'attivo',
         created_at datetime DEFAULT CURRENT_TIMESTAMP,
         updated_at datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
         PRIMARY KEY (id),
