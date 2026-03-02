@@ -16,9 +16,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 function mioweb_register_sito_cpt() {
     
     $labels = array(
-        'name'                  => _x( 'Websites', 'Post type general name', 'mioweb-agency' ),
-        'singular_name'         => _x( 'Website', 'Post type singular name', 'mioweb-agency' ),
-        'menu_name'            => _x( 'Websites', 'Admin Menu text', 'mioweb-agency' ),
+        'name'                => _x( 'Websites', 'Post type general name', 'mioweb-agency' ),
+        'singular_name'       => _x( 'Website', 'Post type singular name', 'mioweb-agency' ),
+        'menu_name'           => _x( 'Websites', 'Admin Menu text', 'mioweb-agency' ),
         'add_new'             => __( 'Add New Website', 'mioweb-agency' ),
         'add_new_item'        => __( 'Add New Website', 'mioweb-agency' ),
         'edit_item'           => __( 'Edit Website', 'mioweb-agency' ),
