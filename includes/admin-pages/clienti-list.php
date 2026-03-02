@@ -66,8 +66,8 @@ function mioweb_render_clienti_list()
     */
 
     // Parametri di ricerca
-    $search = isset($_GET['s']) ? sanitize_text_field( wp_unslash($_GET['s']) ) : '';
-    $tipo = isset($_GET['tipo']) ? sanitize_text_field( wp_unslash($_GET['tipo']) ) : '';
+    $search = isset($_GET['s']) ? sanitize_text_field(wp_unslash($_GET['s'])) : '';
+    $tipo = isset($_GET['tipo']) ? sanitize_text_field(wp_unslash($_GET['tipo'])) : '';
     $page = isset($_GET['paged']) ? intval($_GET['paged']) : 1;
 
     $clienti = mioweb_get_clienti([
@@ -122,6 +122,44 @@ function mioweb_render_clienti_list()
                     <a href="?page=mioweb-clienti" class="button">
                         <?php esc_html_e('Reset', 'mioweb-agency'); ?>
                     </a>
+
+                    <!-- NUOVO PULSANTE ESPORTAZIONE -->
+                    <?php
+                    $is_pro_active = function_exists('mioweb_is_pro_active') && mioweb_is_pro_active();
+
+                    if ($is_pro_active) :
+                        // PRO: pulsante attivo
+                    ?>
+                        <a href="<?php echo esc_url(wp_nonce_url(admin_url('admin-post.php?action=mioweb_export_clients_csv'), 'mioweb_export_nonce')); ?>"
+                            class="button button-primary"
+                            style="margin-left: 10px;">
+                            <span class="dashicons dashicons-download"></span>
+                            <?php esc_html_e('Export CSV', 'mioweb-agency'); ?>
+                        </a>
+                    <?php else :
+                        // FREE: pulsante disabilitato con tooltip
+                    ?>
+                        <!-- FREE: pulsante disabilitato con badge separato -->
+                        <span class="mioweb-export-wrapper" style="margin-left: 10px; display: inline-block;">
+                            <a href="#"
+                                class="button mioweb-pro-disabled"
+                                onclick="return false;"
+                                title="<?php esc_attr_e('Available in PRO version', 'mioweb-agency'); ?>"
+                                style="opacity: 0.7; cursor: not-allowed; text-decoration: none;">
+                                <span class="dashicons dashicons-download"></span>
+                                <?php esc_html_e('Export CSV', 'mioweb-agency'); ?>
+                            </a>
+                            <a href="https://seconet.it/mioweb_agency_pro"
+                                target="_blank"
+                                class="mioweb-pro-badge-link"
+                                style="display: inline-block; margin-left: 5px; text-decoration: none;">
+                                <span class="mioweb-pro-badge">
+                                    <?php esc_html_e('PRO', 'mioweb-agency'); ?>
+                                </span>
+                            </a>
+                        </span>
+                    <?php endif; ?>
+
                 </div>
             </form>
         </div>
@@ -136,6 +174,7 @@ function mioweb_render_clienti_list()
                     <th scope="col"><?php esc_html_e('VAT / Fiscal Code', 'mioweb-agency'); ?></th>
                     <th scope="col"><?php esc_html_e('Email', 'mioweb-agency'); ?></th>
                     <th scope="col"><?php esc_html_e('Phone', 'mioweb-agency'); ?></th>
+                    <th scope="col"><?php esc_html_e('Contracts', 'mioweb-agency'); ?></th>
                     <th scope="col"><?php esc_html_e('Active Hosting', 'mioweb-agency'); ?></th>
                     <th scope="col"><?php esc_html_e('Actions', 'mioweb-agency'); ?></th>
                 </tr>
@@ -197,6 +236,24 @@ function mioweb_render_clienti_list()
                             </td>
                             <td>
                                 <?php echo esc_html($cliente->telefono ?: $cliente->cellulare ?: '—'); ?>
+                            </td>
+                            <td>
+                                <?php
+                                $stats = mioweb_get_cliente_stats($cliente->id);
+                                $is_pro_active = function_exists('mioweb_is_pro_active') && mioweb_is_pro_active();
+
+                                if ($is_pro_active) {
+                                    // PRO: mostra il numero reale
+                                    $badge_class = 'mioweb-badge';
+                                    $badge_text = $stats['contratti_totali'];
+                                    echo '<span class="' . esc_attr($badge_class) . '">' . esc_html($badge_text) . '</span>';
+                                } else {
+                                    // FREE: mostra "PRO" in grigio
+                                    $badge_text = '<a href="https://seconet.it/mioweb_agency_pro" target="_blank">PRO</a>';
+                                    echo '<span class="mioweb-badge mioweb-badge-pro">' . wp_kses_post($badge_text) . '</span>';
+                                }
+                                ?>
+
                             </td>
                             <td>
                                 <span class="mioweb-badge">
