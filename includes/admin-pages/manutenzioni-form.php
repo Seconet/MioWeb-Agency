@@ -329,14 +329,47 @@ function mioweb_render_manutenzioni_form()
                     <div class="mioweb-form-section">
                         <h2><?php esc_html_e('Notes', 'mioweb-agency'); ?></h2>
 
-                        <textarea id="manutenzione_note"
-                            name="manutenzione[note]"
-                            rows="8"
-                            style="width: 100%;"><?php echo esc_textarea($manutenzione->note ?? ''); ?></textarea>
+                        <?php
+                       
+                        $is_pro_active = function_exists('mioweb_is_pro_active') && mioweb_is_pro_active();
 
-                        <p class="description">
-                            <?php esc_html_e('Internal notes about this contract.', 'mioweb-agency'); ?>
-                        </p>
+                        if ($is_pro_active) :
+                            // PRO: EDITOR WYSIWYG
+                            $editor_id = 'manutenzione_note';
+                            $editor_content = $manutenzione->note ?? '';
+
+                            wp_editor($editor_content, $editor_id, [
+                                'textarea_name' => 'manutenzione[note]',
+                                'textarea_rows' => 10,
+                                'media_buttons' => false,
+                                'teeny'         => true, // Versione compatta
+                                'quicktags'     => true,
+                                'tinymce'       => [
+                                    'toolbar1' => 'bold,italic,underline,separator,bullist,numlist,separator,link,unlink,undo,redo'
+                                ]
+                            ]);
+
+                        else :
+                            // FREE: TEXTAREA semplice (con tag PRO)
+                        ?>
+                            <div class="mioweb-pro-field-wrapper">
+                                <span class="mioweb-pro-tag"
+                                    title="<?php esc_attr_e('Format notes with WYSIWYG editor in PRO version', 'mioweb-agency'); ?>">
+                                    🔒 PRO
+                                </span>
+
+                                <textarea id="manutenzione_note"
+                                    name="manutenzione[note]"
+                                    rows="8"
+                                    style="width: 100%;"
+                                    placeholder="<?php esc_attr_e('Add private notes about this contract.', 'mioweb-agency'); ?>"
+                                    readonly><?php echo esc_textarea($manutenzione->note ?? ''); ?></textarea>
+
+                                <p class="description">
+                                    <?php esc_html_e('Upgrade to PRO to format notes with rich text editor.', 'mioweb-agency'); ?>
+                                </p>
+                            </div>
+                        <?php endif; ?>
                     </div>
                 </div>
             </div>
