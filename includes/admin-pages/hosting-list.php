@@ -17,6 +17,28 @@ if (! defined('ABSPATH')) {
 function mioweb_render_hosting_list()
 {
 
+    global $wpdb;
+    $today = current_time('Y-m-d');
+    $next_month = gmdate('Y-m-d', strtotime('+30 days'));
+
+    // AGGIORNAMENTO AUTOMATICO STATI TABELLA CUSTOM HOSTING
+    // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
+    $wpdb->query(
+        $wpdb->prepare(
+            "UPDATE $wpdb->prefix . 'mioweb_hosting' 
+         SET status = 
+            CASE
+                WHEN data_scadenza < %s THEN 'scaduto'
+                WHEN data_scadenza BETWEEN %s AND %s THEN 'in_scadenza'
+                ELSE 'attivo'
+            END
+         WHERE data_scadenza IS NOT NULL",
+            $today,
+            $today,
+            $next_month
+        )
+    );
+
     // Enqueue style direttamente qui
     wp_enqueue_style(
         'mioweb-hosting-list',
@@ -63,11 +85,11 @@ function mioweb_render_hosting_list()
 
 
     // Parametri di filtro
-    $search = isset($_GET['s']) ? sanitize_text_field( wp_unslash($_GET['s']) ) : '';
+    $search = isset($_GET['s']) ? sanitize_text_field(wp_unslash($_GET['s'])) : '';
     $cliente_id = isset($_GET['cliente_id']) ? intval($_GET['cliente_id']) : 0;
-    $status = isset($_GET['status']) ? sanitize_text_field( wp_unslash( $_GET['status']) ) : '';
-    $provider = isset($_GET['provider']) ? sanitize_text_field( wp_unslash($_GET['provider']) ) : '';
-    $scadenza = isset($_GET['scadenza']) ? sanitize_text_field( wp_unslash($_GET['scadenza']) ) : '';
+    $status = isset($_GET['status']) ? sanitize_text_field(wp_unslash($_GET['status'])) : '';
+    $provider = isset($_GET['provider']) ? sanitize_text_field(wp_unslash($_GET['provider'])) : '';
+    $scadenza = isset($_GET['scadenza']) ? sanitize_text_field(wp_unslash($_GET['scadenza'])) : '';
     $page = isset($_GET['paged']) ? intval($_GET['paged']) : 1;
 
     $hosting_list = mioweb_get_hosting_list([
@@ -84,7 +106,7 @@ function mioweb_render_hosting_list()
     global $wpdb;
 
     // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
-    $clienti = $wpdb->get_results( 
+    $clienti = $wpdb->get_results(
         "SELECT id, ragione_sociale, nome, cognome 
         FROM {$wpdb->prefix}mioweb_clienti 
         ORDER BY ragione_sociale, nome"
@@ -93,7 +115,7 @@ function mioweb_render_hosting_list()
     // Ottieni provider unici per filtro
 
     // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
-    $providers = $wpdb->get_col( 
+    $providers = $wpdb->get_col(
         "SELECT DISTINCT provider 
         FROM {$wpdb->prefix}mioweb_hosting 
         WHERE provider != '' 
@@ -321,6 +343,14 @@ function mioweb_render_hosting_list()
                                     case 'cancellato':
                                         $status_class = 'status-expired';
                                         $status_label = __('Cancelled', 'mioweb-agency');
+                                        break;
+                                    case 'scaduto':
+                                        $status_class = 'status-scaduto';
+                                        $status_label = __('Expired', 'mioweb-agency');
+                                        break;
+                                    case 'in_scadenza':
+                                        $status_class = 'status-in-scadenza';
+                                        $status_label = __('In Expiration', 'mioweb-agency');
                                         break;
                                     default:
                                         $status_class = '';
