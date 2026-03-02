@@ -410,7 +410,7 @@ function mioweb_render_hosting_form()
                                     if (!$is_pro_active) : ?>
                                         <span class="mioweb-pro-tag"
                                             title="<?php esc_attr_e('This field is available in PRO version', 'mioweb-agency'); ?>">
-                                            ?? PRO
+                                            🔒 PRO
                                         </span>
                                     <?php endif; ?>
                                 </label>
@@ -454,7 +454,7 @@ function mioweb_render_hosting_form()
                                     <?php if (!$is_pro_active) : ?>
                                         <span class="mioweb-pro-tag"
                                             title="<?php esc_attr_e('This field is available in PRO version', 'mioweb-agency'); ?>">
-                                            ?? PRO
+                                            🔒 PRO
                                         </span>
                                     <?php endif; ?>
                                 </label>
