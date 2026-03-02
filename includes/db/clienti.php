@@ -292,11 +292,14 @@ function mioweb_get_cliente_stats($cliente_id)
         $cliente_id
     ));
 
+     $contratti_totali = intval($hosting_count) + intval($manutenzioni_attive);
+
     // phpcs:enable
     return [
         'hosting_attivi' => intval($hosting_count),
         'manutenzioni_attive' => intval($manutenzioni_attive),
-        'prossima_scadenza' => $prossima_scadenza
+        'prossima_scadenza' => $prossima_scadenza,
+        'contratti_totali' => $contratti_totali // <-- NUOVA CHIAVE AGGIUNTA
     ];
 }
 /* phpcs:enable */
