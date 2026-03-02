@@ -66,9 +66,6 @@ function mioweb_load_dependencies()
 
         require_once MIOWEB_PLUGIN_DIR . 'includes/post-types/temi.php'; // TEMI
 
-
-
-
           
     }
 
@@ -115,3 +112,21 @@ function mioweb_register_script() {
     wp_register_style( 'mioweb-dashboard', plugins_url('/includes/css/dashboard.css', __FILE__), false, '1.0.0', 'all');
 }
 
+/**
+ * Aggiunge una nota informativa prima del link "Disattiva"
+ *
+ * @param array $actions Array dei link di azione (Disattiva, Modifica, ecc.)
+ * @return array Links modificati
+ */
+function mioweb_add_plugin_action_notice( $actions ) {
+    // Crea la nota
+    $notice = '<span style="color:black; padding: 2px 6px; border-radius: 3px; display: inline-block;">';
+    $notice .= '?? ' . esc_html__( 'Data will be permanently deleted upon plugin deletion.', 'mioweb-agency' );
+    $notice .= '</span><br>';
+    
+    // Inserisce la nota all'inizio dell'array (sopra Disattiva)
+    $actions = array_merge( [ 'mioweb_notice' => $notice ], $actions );
+    
+    return $actions;
+}
+add_filter( 'plugin_action_links_' . plugin_basename( __FILE__ ), 'mioweb_add_plugin_action_notice' );
