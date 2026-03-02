@@ -33,14 +33,34 @@ function mioweb_render_hosting_form()
     if (isset($_POST['mioweb_save_hosting'])) {
         check_admin_referer('mioweb_save_hosting', 'mioweb_nonce');
 
-        //$data = $_POST['hosting'];
-
         // 1. Verifico che l'array esista
         // Puliamo l'intero array in un colpo solo prima di assegnarlo
-        $hosting_post = isset( $_POST['hosting'] ) ? map_deep( wp_unslash( (array) $_POST['hosting'] ), 'sanitize_text_field' ) : array();
+        $hosting_post = isset($_POST['hosting']) ? map_deep(wp_unslash((array) $_POST['hosting']), 'sanitize_text_field') : array();
 
         // 2. Creo un array pulito (Sanitizzazione + Unslash)
         $data = array();
+        // $data_scadenza = sanitize_text_field($_POST['hosting']['data_scadenza']);
+        if (isset($_POST['hosting']['data_scadenza'])) {
+            $data_scadenza = sanitize_text_field(wp_unslash($_POST['hosting']['data_scadenza']));
+        } else {
+            $data_scadenza = '';
+        }
+
+        $today = current_time('Y-m-d');
+
+        if (empty($data_scadenza)) {
+            $stato = 'in_attivazione';
+        } elseif ($data_scadenza < $today) {
+            $stato = 'scaduto';
+        } elseif ($data_scadenza <= gmdate('Y-m-d', strtotime('+30 days'))) {
+            $stato = 'in_scadenza'; // se aggiungi all'enum
+            // oppure $stato = 'attivo'; se non vuoi l'enum
+        } else {
+            $stato = 'attivo';
+        }
+
+        // Aggiungi $stato ai dati da salvare
+        $data['status'] = $stato;
 
         if (! empty($hosting_post)) {
             foreach ($hosting_post as $key => $value) {
@@ -328,20 +348,50 @@ function mioweb_render_hosting_form()
 
                         <div class="mioweb-form-row">
                             <div class="mioweb-form-field">
-                                <label for="hosting_status">
-                                    <?php esc_html_e('Status', 'mioweb-agency'); ?>
-                                </label>
-                                <select id="hosting_status" name="hosting[status]">
-                                    <option value="attivo" <?php selected($hosting->status ?? '', 'attivo'); ?>>
-                                        <?php esc_html_e('Active', 'mioweb-agency'); ?>
-                                    </option>
-                                    <option value="sospeso" <?php selected($hosting->status ?? '', 'sospeso'); ?>>
-                                        <?php esc_html_e('Suspended', 'mioweb-agency'); ?>
-                                    </option>
-                                    <option value="cancellato" <?php selected($hosting->status ?? '', 'cancellato'); ?>>
-                                        <?php esc_html_e('Cancelled', 'mioweb-agency'); ?>
-                                    </option>
-                                </select>
+                                <?php
+                                // Calcola lo stato in base alla data (se in edit) o usa valori di default (se nuovo)
+                                if ($hosting_id && isset($hosting->data_scadenza)) {
+                                    $today = current_time('Y-m-d');
+                                    $data_scadenza = $hosting->data_scadenza;
+
+                                    if (empty($data_scadenza)) {
+                                        $stato_calcolato = 'in_attivazione';
+                                        $stato_label = __('In activation', 'mioweb-agency');
+                                    } elseif ($data_scadenza < $today) {
+                                        $stato_calcolato = 'scaduto';
+                                        $stato_label = __('Expired', 'mioweb-agency');
+                                    } elseif ($data_scadenza <= gmdate('Y-m-d', strtotime('+30 days'))) {
+                                        $stato_calcolato = 'in_scadenza';
+                                        $stato_label = __('Expiring soon', 'mioweb-agency');
+                                    } else {
+                                        $stato_calcolato = 'attivo';
+                                        $stato_label = __('Active', 'mioweb-agency');
+                                    }
+                                } else {
+                                    // Nuovo hosting: stato predefinito
+                                    $stato_calcolato = 'in_attivazione';
+                                    $stato_label = __('In activation', 'mioweb-agency');
+                                }
+                                ?>
+
+                                <!-- Campo hidden per inviare lo stato -->
+                                <input type="hidden" name="hosting[status]" value="<?php echo esc_attr($stato_calcolato); ?>">
+
+                                <!-- Visualizzazione stato (non modificabile) -->
+                                <div class="mioweb-form-field">
+                                    <label><?php esc_html_e('Status', 'mioweb-agency'); ?></label>
+                                    <div class="mioweb-status-display">
+                                        <span class="mioweb-status-badge status-<?php echo esc_attr($stato_calcolato); ?>">
+                                            <?php echo esc_html($stato_label); ?>
+                                        </span>
+                                        <?php if ($hosting_id) : ?>
+                                            <p class="description">
+                                                <?php esc_html_e('Status is automatically calculated based on the expiry date.', 'mioweb-agency'); ?>
+                                            </p>
+                                        <?php endif; ?>
+                                    </div>
+                                </div>
+
                             </div>
                         </div>
                     </div>
@@ -355,13 +405,45 @@ function mioweb_render_hosting_form()
                         <div class="mioweb-form-row">
                             <div class="mioweb-form-field full-width">
                                 <label for="hosting_credenziali_ftp">
-                                    <?php esc_html_e('FTP/SSH Credentials', 'mioweb-agency'); ?>
+                                    <?php
+                                    $is_pro_active = function_exists('mioweb_is_pro_active') && mioweb_is_pro_active();
+                                    if (!$is_pro_active) : ?>
+                                        <span class="mioweb-pro-tag"
+                                            title="<?php esc_attr_e('This field is available in PRO version', 'mioweb-agency'); ?>">
+                                            ?? PRO
+                                        </span>
+                                    <?php endif; ?>
                                 </label>
-                                <textarea id="hosting_credenziali_ftp"
-                                    name="hosting[credenziali_ftp]"
-                                    rows="3"
-                                    style="width: 100%;"
-                                    placeholder="<?php esc_attr_e('Host, username, password, port...', 'mioweb-agency'); ?>"><?php echo esc_textarea($hosting->credenziali_ftp ?? ''); ?></textarea>
+
+                                <?php
+
+                                if ($is_pro_active) : ?>
+                                    <!-- Campo attivo -->
+                                    <textarea name="hosting[credenziali_ftp]"
+                                        rows="3"
+                                        class="widefat"
+                                        placeholder="<?php esc_attr_e('Host, username, password, port...', 'mioweb-agency'); ?>"><?php echo esc_textarea($hosting->credenziali_ftp ?? ''); ?></textarea>
+
+                                <?php else : ?>
+                                    <!-- Placeholder PRO con messaggio -->
+                                    <div class="mioweb-pro-placeholder">
+                                        <p class="description">
+                                            <?php esc_html_e('Store and manage FTP/SSH credentials securely.', 'mioweb-agency'); ?>
+                                        </p>
+                                        <p>
+                                            <a href="https://seconet.it/mioweb_agency_pro"
+                                                class="button button-secondary"
+                                                target="_blank">
+                                                <?php esc_html_e('Upgrade to PRO', 'mioweb-agency'); ?>
+                                            </a>
+                                        </p>
+                                        <!-- Campo hidden per non perdere dati se esistono -->
+                                        <?php if (!empty($hosting->credenziali_ftp)) : ?>
+                                            <textarea style="display:none;"><?php echo esc_textarea($hosting->credenziali_ftp); ?></textarea>
+                                        <?php endif; ?>
+                                    </div>
+                                <?php endif; ?>
+
                             </div>
                         </div>
 
@@ -369,12 +451,34 @@ function mioweb_render_hosting_form()
                             <div class="mioweb-form-field full-width">
                                 <label for="hosting_credenziali_admin">
                                     <?php esc_html_e('Admin Panel Credentials', 'mioweb-agency'); ?>
+                                    <?php if (!$is_pro_active) : ?>
+                                        <span class="mioweb-pro-tag"
+                                            title="<?php esc_attr_e('This field is available in PRO version', 'mioweb-agency'); ?>">
+                                            ?? PRO
+                                        </span>
+                                    <?php endif; ?>
                                 </label>
-                                <textarea id="hosting_credenziali_admin"
-                                    name="hosting[credenziali_admin]"
-                                    rows="3"
-                                    style="width: 100%;"
-                                    placeholder="<?php esc_attr_e('URL, username, password...', 'mioweb-agency'); ?>"><?php echo esc_textarea($hosting->credenziali_admin ?? ''); ?></textarea>
+
+                                <?php if ($is_pro_active) : ?>
+                                    <!-- Campo attivo (PRO) -->
+                                    <textarea id="hosting_credenziali_admin"
+                                        name="hosting[credenziali_admin]"
+                                        rows="3"
+                                        style="width: 100%;"
+                                        placeholder="<?php esc_attr_e('URL, username, password...', 'mioweb-agency'); ?>"><?php echo esc_textarea($hosting->credenziali_admin ?? ''); ?></textarea>
+
+                                <?php else : ?>
+                                    <!-- Placeholder PRO (FREE) -->
+                                    <div class="mioweb-pro-placeholder">
+                                        <p class="description">
+                                            <?php esc_html_e('Store admin panel credentials securely with the PRO version.', 'mioweb-agency'); ?>
+                                        </p>
+                                        <!-- Campo hidden per mantenere eventuali dati già salvati (invisible) -->
+                                        <?php if (!empty($hosting->credenziali_admin)) : ?>
+                                            <textarea style="display:none;"><?php echo esc_textarea($hosting->credenziali_admin); ?></textarea>
+                                        <?php endif; ?>
+                                    </div>
+                                <?php endif; ?>
                             </div>
                         </div>
                     </div>
@@ -436,7 +540,6 @@ function mioweb_render_hosting_form()
             </div>
         </form>
     </div>
-
 
 <?php
 }
