@@ -1,27 +1,22 @@
 <?php
 ob_start(); //
 /**
- * Plugin Name
- *
- * @package           MioWebAgency
- * @author            Sergio Cornacchione
- * @copyright         2026 Seconet
- * @license           GPL-2.0-or-later
- *
- * @wordpress-plugin
- * Plugin Name:       MioWeb Agency Web
- * Plugin URI:        https://github.com/Seconet/MioWeb-Agency
- * Description:       A complete management system for web agencies to manage clients, hosting, maintenance contracts, websites, plugins, and themes.
- * Version:           1.0.0
+ * Plugin Name: MioWeb Agency
+ * Plugin URI:  https://github.com/Seconet/MioWeb-Agency
+ * Description: Streamline your web agency workflow. Manage clients, hosting, maintenance contracts, websites, plugins, and themes — all from your WordPress dashboard. A clean, focused tool built for professionals.
+ * Version:     1.0.0
+ * Author:      Sergio Cornacchione
+ * Author URI:  https://seconet.it
+ * Text Domain: mioweb-agency
+ * Domain Path: /languages
+ * License:     GPL v2 or later
+ * License URI: http://www.gnu.org/licenses/gpl-2.0.txt
  * Requires at least: 6.0
- * Requires PHP:      7.4
- * Author:            Sergio Cornacchione
- * Author URI:        https://seconet.it
- * Text Domain:       mioweb-agency
- * License:           GPL v2 or later
- * License URI:       http://www.gnu.org/licenses/gpl-2.0.txt
-
+ * Requires PHP: 7.4
+ *
+ * @package MioWebAgency
  */
+
 
 // Evita accesso diretto
 if (! defined('ABSPATH')) {
@@ -130,3 +125,4 @@ function mioweb_add_plugin_action_notice( $actions ) {
     return $actions;
 }
 add_filter( 'plugin_action_links_' . plugin_basename( __FILE__ ), 'mioweb_add_plugin_action_notice' );
+
