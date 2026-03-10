@@ -9,6 +9,11 @@
 **License URI:** https://www.gnu.org/licenses/gpl-2.0.html 
 
 MioWeb Agency Management è il CRM definitivo progettato specificamente per web agency e freelance che lavorano con WordPress. Gestisci clienti, piani hosting, contratti di manutenzione e il tuo portfolio progetti in un unico hub centralizzato.
+---
+![Version](https://img.shields.io/badge/versione-1.0.0-blue.svg)
+![License](https://img.shields.io/badge/licenza-GPLv2-green.svg)
+![Wordpress](https://img.shields.io/badge/wordPress-6+-blue)
+---
 
 🔥 ## Perché MioWeb?
 Gestire un'agenzia web significa destreggiarsi tra decine di scadenze, credenziali smarrite e contratti ricorrenti. Questo plugin elimina il caos dei fogli Excel, portando tutta la gestione operativa direttamente dentro la tua bacheca WordPress.
@@ -87,5 +92,6 @@ Questo progetto è distribuito sotto licenza GPLv2 o successiva. Consulta il fil
 
 📧 ## Supporto
 Sviluppato con ❤️ da Seconet.it Per domande o supporto commerciale, contattaci tramite il nostro sito web.
+
 
 
